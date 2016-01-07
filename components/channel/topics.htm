@@ -39,7 +39,7 @@ div class="forum-threads-head">
             </div>
             <div class="thread-last">
                 <span class="f-user-link"><a href="{{ topic.last_post_member.url }}"><strong>{{ topic.last_post_member.username }}</strong></a></span>
-                <span class="t-date">10.Mar 14</span>
+                <span class="t-date"><a href="{{ topic.url }}?page=last#post-{{ topic.last_post_id }}">{{ topic.last_post_at.diffForHumans }}</a></span>
             </div>
         <!-- END .thread-link -->
         </div>
