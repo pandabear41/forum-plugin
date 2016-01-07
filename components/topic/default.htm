@@ -1,9 +1,9 @@
-<div class="rainlab-forum">
+<div class="forum-block">
 
     {% flash %}
-        <div class="alert alert-{{ type == 'error' ? 'danger' : type }}">
-            {{ message }}
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <div class="info-message{{ type }}">
+            <a href="#" class="close-info" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i></a>
+            <p><strong>{{ type }}:</strong>{{ message }}</p>
         </div>
     {% endflash %}
 
@@ -13,39 +13,67 @@
 
     {% if topic %}
 
-        <h4>{{ topic.subject }}</h4>
+        <h2><span>{{ topic.is_locked ? '<i class="fa fa-lock"></i>' }}{{ topic.subject }}</span></h2>
 
-        <div class="row">
-            <div class="col-md-3 col-md-push-9">
-
-                <div id="topicControlPanel">
-                    {% partial "@controlpanel" %}
-                </div>
-
-            </div>
-            <div class="col-md-9 col-md-pull-3">
-
-                {% partial "@posts" %}
-
+        <div class="content-padding">
+            <div class="forum-description">
                 {% partial "@pagination" %}
-
-                <h4>Reply to this discussion</h4>
-                {% if not topic.canPost %}
-                    <p>
-                        You cannot edit posts or make replies:
-                        {% if member.is_banned %}Your account is banned.{% endif %}
-                        {% if topic.is_locked %}This topic is locked.{% endif %}
-                    </p>
-                {% else %}
-                    {% if member %}
-                        {% partial "@postform" %}
-                    {% else %}
-                        <p>You should be logged in before you can post.</p>
-                    {% endif %}
+            </div>
+            <div class="topic-right right">
+                {% if topic.is_sticky %}
+                    <span><i class="fa fa-unlock-alt"></i>Pinned</span>
                 {% endif %}
+                {% if topic.is_locked %}
+                    <span><i class="fa fa-unlock-alt"></i>Thread closed</span>
+                {% endif %}
+                
+                <span>{{ topic.count_posts }} Posts</span>
+                <i class="fa fa-eye icon-eye-open"></i> {{ topic.count_views }} views
+            </div>
 
+            <div id="topicControlPanel">
+                {% partial "@controlpanel" %}
             </div>
         </div>
+        <!-- BEGIN .forum-thread -->
+        <div class="forum-thread">
+                {% partial "@posts" %}
+        </div>
+        <h4>Reply to this discussion</h4>
+         {% if not topic.canPost %}
+            <p>
+                You cannot edit posts or make replies:
+                {% if member.is_banned %}Your account is banned.{% endif %}
+                {% if topic.is_locked %}This topic is locked.{% endif %}
+            </p>
+        {% else %}
+            {% if member %}
+                <div class="content-padding quick-reply" id="quick-reply">
+                    <div class="forum-description">
+                        <a href="#quick-reply" class="newdefbutton"><i class="fa fa-comment-o"></i>Quick reply</a>
+                    </div>
+                </div>
+                {% partial "@postform" %}
+            {% else %}
+                <p>You should be logged in before you can post.</p>
+            {% endif %}
+        {% endif %}
+
+        <div class="content-padding">
+            <div class="forum-description">
+                {% partial "@pagination" %}
+            </div>
+            {% if topic.is_sticky %}
+                <span><i class="fa fa-unlock-alt"></i>Pinned</span>
+            {% endif %}
+            {% if topic.is_locked %}
+                <span><i class="fa fa-unlock-alt"></i>Thread closed</span>
+            {% endif %}
+            
+            <span>{{ topic.count_posts }} Posts</span>
+            <i class="fa fa-eye icon-eye-open"></i> {{ topic.count_views }} views
+        </div>
+
 
     {% elseif channel %}
 

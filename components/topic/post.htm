@@ -1,23 +1,27 @@
-<a href="{{ post.member.url }}" class="avatar">
-    <img src="{{ post.member.user.avatarThumb(50) }}" alt="{{ post.member.username }}" />
-</a>
-<div class="content">
-    <a href="{{ post.member.url }}" class="author">{{ post.member.username }}</a>
-    <div class="metadata">
-        <div class="date">
-            <a href="#post-{{ post.id }}">{{ post.created_at.diffForHumans }}</a>
+<div class="user-block">
+    <a href="{{ post.member.url }}" class="avatar away user-tooltip">
+        <img src="{{ post.member.user.avatarThumb(50) }}" class="setborder" title="" alt="{{ post.member.username }}" />
+    </a>
+    <div class="user-account">
+        <div>
+            <a href="{{ post.member.url }}" class="forum-user user-tooltip"><b>{{ post.member.username }}</b></a>
+        </div>
+        <div>
+            <span><strong>4</strong> posts</span>
         </div>
         {% if post.member.is_banned %}
             <div class="status text-danger">
-                <i class="icon-exclamation"></i> Banned
+                <i class="fa fa-exclamation"></i> Banned
             </div>
         {% elseif post.member.is_moderator %}
             <div class="status">
-                <i class="icon-star"></i> Moderator
+                <i class="fa fa-star"></i> Moderator
             </div>
         {% endif %}
     </div>
-
+    <div class="clear-float"></div>
+</div>
+<div class="post-text-block">
     {% if mode == 'edit' %}
 
         {{ form_open() }}
@@ -73,31 +77,51 @@
     {% else %}
         <div class="text">
             {{ post.content_html|raw }}
-
-            {% if post.created_at != post.updated_at %}
-                <p><small class="text text-muted">Last updated {{ post.updated_at.diffForHumans }}</small></p>
-            {% endif %}
         </div>
-        <div class="actions">
-            {% if topic.canPost %}
+    {% endif %}
+</div>
+<div class="post-meta-block">
+    <div>
+        <a href="#post-{{ post.id }}">#{{ post.id }}</a>
+    </div>
+    <div>
+        <span class="post-date">{{ post.created_at.diffForHumans }}</span>
+    </div>
+    <div class="bottom">
+        {% if topic.canPost and post.canEdit and mode != 'edit' and mode != 'delete' %}
+            <a href="javascript:;"
+                class="defbutton admin-color edit"
+                data-request="onUpdate"
+                data-request-data="post: {{ post.id }}"
+                data-request-update="'{{ __SELF__ ~ '::post' }}': '#post-{{ post.id }}'">
+                <i class="fa fa-trash-o"></i>
+            </a>
+        {% endif %}
+        {% if topic.canPost and post.canEdit and mode != 'edit' and mode != 'delete' %}
                 <a href="javascript:;"
-                    class="quote"
-                    data-request-data="post: {{ post.id }}"
-                    data-quote-button>
-                    Quote
-                </a>
-            {% endif %}
-            {% if topic.canPost and post.canEdit and mode != 'edit' and mode != 'delete' %}
-                <a href="javascript:;"
-                    class="edit"
+                    class="defbutton admin-color edit"
                     data-request="onUpdate"
                     data-request-data="post: {{ post.id }}"
                     data-request-update="'{{ __SELF__ ~ '::post' }}': '#post-{{ post.id }}'">
-                    Edit
+                    <i class="fa fa-pencil"></i>
                 </a>
-            {% endif %}
-        </div>
-    {% endif %}
+        {% endif %}
+        {% if topic.canPost %}
+            <a href="javascript:;"
+                class="defbutton scroll quote"
+                data-request-data="post: {{ post.id }}"
+                data-quote-button>
+                <i class="fa fa-quote-right"></i>Quote
+            </a>
+            <a href="#quick-reply" 
+               class="defbutton scroll"
+               data-request-data="post: {{ post.id }}"
+               data-quote-button>
+                <i class="fa fa-comment-o"></i>Reply
+            </a>
+        {% endif %}
+    </div>
 
 </div>
-<div class="post-divider"></div>
+
+

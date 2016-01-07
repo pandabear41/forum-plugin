@@ -1,23 +1,42 @@
-<div class="reply-form" id="postForm">
+<div class="reply-box reply-form" id="postForm">
 
     {{ form_open({ request: 'onPost' }) }}
 
         <input type="hidden" name="topic" value="{{ topic.id }}" />
 
-        <div class="member-area">
-            <img src="{{ member.user.avatarThumb(50) }}" class="member-avatar" alt="{{ member.username }}" />
+        <div class="comment-avatar left">
+            <a href="{{ member.user.url }}" class="avatar big">
+                <span class="wrapimg"><img src="{{ member.user.avatarThumb(50) }}" class="setborder" title="" alt="{{ member.username }}"></span>
+            </a>
         </div>
 
-        <div class="post-area">
-            <textarea
-                id="topicContent"
-                name="content"
-                rows="6"
-                class="form-control">{{ form_value('content') }}</textarea>
-            <span class="help-block">You can use <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a> syntax.</span>
-            <div class="post-buttons">
-                <button type="submit" class="btn btn-primary btn-lg">Post a Reply</button>
-            </div>
+        <div class="reply-textarea">
+            <form action="" method="get">
+                <div class="respond-textarea">
+                    <div class="textarea-arrow"></div>
+                    <div class="textarea-wrapper strike-wysiwyg-enable" rel="wys-current">
+                        <div class="bbcodes">
+                            <a href="#strike-bb" class="strike-bold"><i class="fa fa-bold strike-tooltip" title="Bold"></i></a>
+                            <a href="#strike-bb" class="strike-italic"><i class="fa fa-italic strike-tooltip" title="Italic"></i></a>
+                            <a href="#strike-bb" class="strike-strike"><i class="fa fa-strikethrough strike-tooltip" title="Strike"></i></a>
+                            <a href="#strike-bb" class="strike-underline"><i class="fa fa-underline strike-tooltip" title="Underline"></i></a>
+                            <a href="#strike-bb" class="strike-link"><i class="fa fa-chain strike-tooltip" title="Hyperlink"></i></a>
+                            <a href="#strike-bb" class="strike-photo"><i class="fa fa-picture-o strike-tooltip" title="Photo"></i></a>
+                            <a href="#strike-bb" class="strike-quote"><i class="fa fa-comment strike-tooltip" title="Quote"></i></a>
+                            <a href="#strike-bb" class="strike-yt"><i class="fa fa-youtube strike-tooltip" title="Youtube video"></i></a>
+                            <a href="#strike-bb" class="strike-code"><i class="fa fa-code strike-tooltip" title="Code"></i></a>
+                            <a href="#strike-bb-switch" class="right"><i class="fa fa-css3 strike-tooltip" title="Revelio WYSIWYG"></i></a>
+                        </div>
+                        <textarea id="topicContent"
+                            name="content"
+                            rows="6"
+                            class="form-control">{{ form_value('content') }}></textarea>
+                    </div>
+                </div>
+                <div class="respond-submit">
+                    <input type="submit" name="send" value="Post Reply">
+                </div>
+            </form>
         </div>
 
     {{ form_close() }}
