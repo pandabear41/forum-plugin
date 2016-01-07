@@ -29,24 +29,40 @@
             <input type="hidden" name="mode" value="save" />
             <input type="hidden" name="post" value="{{ post.id }}" />
 
-            {% if topic.first_post.id == post.id %}
-                <input type="text" name="subject" class="form-control" value="{{ topic.subject }}" />
-            {% endif %}
-
-            <div class="text">
+            
+            <div class="respond-input">
+                {% if topic.first_post.id == post.id %}
+                    <input type="text" name="subject" class="form-control" value="{{ topic.subject }}" />
+                {% endif %}
+            </div>
+            <div class="respond-textarea">
+                <div class="textarea-wrapper strike-wysiwyg-enable" rel="wys-current">
+                    <div class="bbcodes">
+                        <a href="#strike-bb" class="strike-bold"><i class="fa fa-bold strike-tooltip" title="Bold"></i></a>
+                        <a href="#strike-bb" class="strike-italic"><i class="fa fa-italic strike-tooltip" title="Italic"></i></a>
+                        <a href="#strike-bb" class="strike-strike"><i class="fa fa-strikethrough strike-tooltip" title="Strike"></i></a>
+                        <a href="#strike-bb" class="strike-underline"><i class="fa fa-underline strike-tooltip" title="Underline"></i></a>
+                        <a href="#strike-bb" class="strike-link"><i class="fa fa-chain strike-tooltip" title="Hyperlink"></i></a>
+                        <a href="#strike-bb" class="strike-photo"><i class="fa fa-picture-o strike-tooltip" title="Photo"></i></a>
+                        <a href="#strike-bb" class="strike-quote"><i class="fa fa-comment strike-tooltip" title="Quote"></i></a>
+                        <a href="#strike-bb" class="strike-yt"><i class="fa fa-youtube strike-tooltip" title="Youtube video"></i></a>
+                        <a href="#strike-bb" class="strike-code"><i class="fa fa-code strike-tooltip" title="Code"></i></a>
+                        <a href="#strike-bb-switch" class="right"><i class="fa fa-css3 strike-tooltip" title="Revelio WYSIWYG"></i></a>
+                    </div>
                 <textarea
                     rows="5"
                     name="content"
                     class="form-control"
                     >{{ post.content }}</textarea>
+                </div>
             </div>
-            <div class="actions">
+            <div class="respond-submit">
                 <a
                     href="javascript:;"
                     data-request="{{ __SELF__ }}::onUpdate"
                     data-request-data="post: {{ post.id }}"
                     data-request-update="'{{ __SELF__ }}::post': '#post-{{ post.id }}'"
-                    class="save">
+                    class="defbutton save">
                     Save
                 </a>
 
@@ -56,7 +72,7 @@
                     data-request-data="post: {{ post.id }}, mode: 'delete'"
                     data-request-update="'{{ __SELF__ }}::post': '#post-{{ post.id }}'"
                     data-request-confirm="Are you sure?"
-                    class="delete">
+                    class="defbutton delete">
                     Delete
                 </a>
 
@@ -64,7 +80,7 @@
                     data-request="{{ __SELF__ }}::onUpdate"
                     data-request-data="post: {{ post.id }}, mode: 'view'"
                     data-request-update="'{{ __SELF__ }}::post': '#post-{{ post.id }}'"
-                    class="cancel">
+                    class="defbutton cancel">
                     Cancel
                 </a>
             </div>
