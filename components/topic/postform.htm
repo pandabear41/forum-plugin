@@ -1,14 +1,13 @@
-<div class="reply-box reply-form" id="postForm">
-    <input type="hidden" name="topic" value="{{ topic.id }}" />
-
+<div class="reply-box reply-form" id="quick-reply">
     <div class="comment-avatar left">
         <a href="{{ member.user.url }}" class="avatar big">
-            <span class="wrapimg"><img src="{{ member.user.avatarThumb(50) }}" class="setborder" title="" alt="{{ member.username }}"></span>
+            <span class="wrapimg"><img src="{{ member.user.avatarThumb(39) }}" class="setborder" title="" alt="{{ member.username }}"></span>
         </a>
     </div>
 
     <div class="reply-textarea">
             {{ form_open({ request: 'onPost' }) }}
+            <input type="hidden" name="topic" value="{{ topic.id }}" />
             <div class="respond-textarea">
                 <div class="textarea-arrow"></div>
                 <div class="textarea-wrapper strike-wysiwyg-enable" rel="wys-current">
