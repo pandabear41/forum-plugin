@@ -1,5 +1,5 @@
 <div class="user-block">
-    <a href="{{ post.member.url }}" class="avatar away user-tooltip">
+    <a href="{{ post.member.url }}" data-img="{{ post.member.user.avatarThumb(90) }}" data-url="{{ 'forum/member' | page({ slug: post.member.username}) }}" data-username="{{ post.member..username }}" data-online="{{ isOnline(post.member.user.id) ? "online" : ""}}" data-quote="{{ post.member.user.profile.per_text_1 ? post.member.user.profile.per_text_1 : "No Quote." }}" class="avatar {{ isOnline(channel.first_topic.last_post_member.user.id) ? "online" : ""}} user-tooltip">
         <img src="{{ post.member.user.avatarThumb(110) }}" class="setborder" title="" alt="{{ post.member.username }}" />
     </a>
     <div class="user-account">
