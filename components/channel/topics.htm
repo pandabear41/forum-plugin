@@ -1,45 +1,52 @@
-<table class="forum-table">
-    <tr>
-        <th colspan="2">Topic</th>
-        <th class="counter-column">Replies</th>
-        <th class="counter-column">Views</th>
-        <th class="activity-column">Last post</th>
-    </tr>
 
+div class="forum-threads-head">
+    <strong class="thread-subject"><span>Thread</span></strong>
+    <strong class="thread-author">Author</strong>
+    <strong class="thread-replies">Replies</strong>
+    <strong class="thread-views">Views</strong>
+    <strong class="thread-last">Last Reply</strong>
+</div>
+<!-- BEGIN .forum-threads -->
+<div class="forum-threads">
     {% for topic in topics %}
-        <tr class="forum-topic">
-            <td class="indicator-column">
-                <div class="topic-indicator {{ member and topic.hasNew ? 'has-new' }}"></div>
-            </td>
-            <td>
-                <h5>
-                    {% if topic.is_sticky %}<strong>Sticky:</strong>{% endif %}
-                    {% if topic.is_locked %}<i class="icon icon-lock"></i> <strong>Locked:</strong>{% endif %}
-                    <a href="{{ topic.url }}">{{ topic.subject }}</a>
-                    <br/><small>by <a href="{{ topic.start_member.url }}">{{ topic.start_member.username }}</a></small>
-                </h5>
-            </td>
-            <td class="counter-column">
-                <p>{{ (topic.count_posts-1) }}</p>
-            </td>
-            <td class="counter-column">
-                <p>{{ topic.count_views }}</p>
-            </td>
-            <td class="activity-column">
-                <p>
-                    <img src="{{ topic.last_post_member.user.avatarThumb(24) }}" class="member-avatar" />
-                    <a href="{{ topic.last_post_member.url }}">{{ topic.last_post_member.username }}</a>
-                    <small>
-                        posted <a href="{{ topic.url }}?page=last#post-{{ topic.last_post_id }}">{{ topic.last_post_at.diffForHumans }}</a>
-                    </small>
-                </p>
-            </td>
-        </tr>
+        <!-- BEGIN .thread-link -->
+        <div class="thread-link {{ member and topic.hasNew ? 'thread-unread' }} {{ topic.is_sticky ? 'thread-sticky' }} {{ topic.is_locked ? 'thread-locked' }}">
+            <a href="{{ topic.url }}">
+                <i class="forum-icon strike-tooltip" title="Topic has {{ member and topic.hasNew ? '' : 'no ' }}new replies">
+                    <i class="fa fa-comment{{ member and topic.hasNew ? 's' }}-o"></i>
+                </i>
+                <span>
+                    {% if topic.is_sticky %}
+                        <i class="sticky">Pinned</i>
+                    {% endif %}
+                    {% if topic.is_locked %}
+                        <i class="thr-closed">Locked</i>
+                    {% endif %}
+                    {{ topic.subject }}
+                </span>
+                {% if topic.is_locked %}
+                    <i class="fa fa-lock"></i>
+                {% endif %}
+            </a>
+            <div class="thread-author">
+                <span class="f-user-link"><a href="{{ topic.start_member.url }}"><strong>{{ topic.start_member.username }}</strong></a></span>
+            </div>
+            <div class="thread-replies">
+                <span>{{ (topic.count_posts-1) }}</span>
+            </div>
+            <div class="thread-views">
+                <span>{{ topic.count_views }}</span>
+            </div>
+            <div class="thread-last">
+                <span class="f-user-link"><a href="{{ topic.last_post_member.url }}"><strong>{{ topic.last_post_member.username }}</strong></a></span>
+                <span class="t-date">10.Mar 14</span>
+            </div>
+        <!-- END .thread-link -->
+        </div>
     {% endfor %}
 
     {% if not topics|length %}
-        <tr>
-            <td colspan="100">There are no topics in this channel.</td>
-        </tr>
+        <h4>There are no topics in this board.</h4>
     {% endif %}
-</table>
+<!-- END .forum-threads -->
+</div>
