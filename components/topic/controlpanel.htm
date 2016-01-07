@@ -1,14 +1,6 @@
 {% if member.is_moderator %}
     <div>
-        {{ form_open({ request: 'onMove', 'data-request-confirm': "Are you sure?" }) }}
-            <label>Move to:</label>
-            <select name="channel" class="form-control input-sm">
-                {% for id, title in __SELF__.channelList %}
-                    <option value="{{ id }}">{{ title|raw }}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Move" />
-        {{ form_close() }}
+
     </div>
 
     <a href="javascript:;"
