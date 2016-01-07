@@ -39,7 +39,7 @@
                 {% partial "@posts" %}
         </div>
         <h4>Reply to this discussion</h4>
-         {% if not topic.canPost %}
+        {% if not topic.canPost %}
             <p>
                 You cannot edit posts or make replies:
                 {% if member.is_banned %}Your account is banned.{% endif %}
@@ -51,8 +51,8 @@
                     <div class="forum-description">
                         <a href="#quick-reply" class="newdefbutton"><i class="fa fa-comment-o"></i>Quick reply</a>
                     </div>
+                    {% partial "@postform" %}
                 </div>
-                {% partial "@postform" %}
             {% else %}
                 <p>You should be logged in before you can post.</p>
             {% endif %}
