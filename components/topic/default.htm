@@ -54,21 +54,6 @@
             {% endif %}
         {% endif %}
 
-        <div class="content-padding">
-            <div class="forum-description">
-                {% partial "@pagination" %}
-            </div>
-            {% if topic.is_sticky %}
-                <span><i class="fa fa-unlock-alt"></i>Pinned</span>
-            {% endif %}
-            {% if topic.is_locked %}
-                <span><i class="fa fa-unlock-alt"></i>Topic closed</span>
-            {% endif %}
-            
-            <span>{{ topic.count_posts }} Posts</span>
-        </div>
-
-
     {% elseif channel %}
         <h2><span>Create a new discussion topic</span></h2>
         <div class="content-padding full-reply">
@@ -77,7 +62,7 @@
 
     {% else %}
 
-        <p>Topic not found</p>
+        <h2><span>Topic not found!</span></h2>
 
     {% endif %}
 </div>
