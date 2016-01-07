@@ -78,7 +78,9 @@
     {% elseif channel %}
 
         <h4>Create a new discussion topic</h4>
-        {% partial "@createform" %}
+        <div class="content-padding full-reply">
+            {% partial "@createform" %}
+        </div>
 
     {% else %}
 

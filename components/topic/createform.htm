@@ -1,33 +1,45 @@
-{{ form_open({ request: 'onCreate' }) }}
+<div class="reply-box">
+    <div class="reply-textarea">
+        {{ form_open({ request: 'onCreate' }) }}
+            <div class="respond-input">
+                <input type="text" placeholder="Thread Title"
+                        id="topicSubject"
+                        name="subject"
+                        class="form-control"
+                        value="{{ post('subject') }}"/>
+            </div>
 
-    <div class="form-group">
-        <label for="topicSubject" class="control-label">Subject</label>
-        <input
-            id="topicSubject"
-            name="subject"
-            type="text"
-            class="form-control"
-            value="{{ post('subject') }}" />
+            <div class="respond-textarea">
+                <div class="textarea-wrapper strike-wysiwyg-enable" rel="wys-current">
+                    <div class="bbcodes">
+                        <a href="#strike-bb" class="strike-bold"><i class="fa fa-bold strike-tooltip" title="Bold"></i></a>
+                        <a href="#strike-bb" class="strike-italic"><i class="fa fa-italic strike-tooltip" title="Italic"></i></a>
+                        <a href="#strike-bb" class="strike-strike"><i class="fa fa-strikethrough strike-tooltip" title="Strike"></i></a>
+                        <a href="#strike-bb" class="strike-underline"><i class="fa fa-underline strike-tooltip" title="Underline"></i></a>
+                        <a href="#strike-bb" class="strike-link"><i class="fa fa-chain strike-tooltip" title="Hyperlink"></i></a>
+                        <a href="#strike-bb" class="strike-photo"><i class="fa fa-picture-o strike-tooltip" title="Photo"></i></a>
+                        <a href="#strike-bb" class="strike-quote"><i class="fa fa-comment strike-tooltip" title="Quote"></i></a>
+                        <a href="#strike-bb" class="strike-yt"><i class="fa fa-youtube strike-tooltip" title="Youtube video"></i></a>
+                        <a href="#strike-bb" class="strike-code"><i class="fa fa-code strike-tooltip" title="Code"></i></a>
+                        <a href="#strike-bb-switch" class="right"><i class="fa fa-css3 strike-tooltip" title="Revelio WYSIWYG"></i></a>
+                    </div>
+                </div>
+                <textarea placeholder="Content"
+                        id="topicContent"
+                        name="content"
+                        rows="8"
+                        type="text"
+                        class="form-control">{{ post('content') }}</textarea>
+            </div>
+            <div class="respond-submit">
+                <input type="submit" name="send" value="Post this topic">
+                {% if returnUrl %}
+                    <a class="defbutton" href="{{ returnUrl }}">Cancel</a>
+                {% endif %}
+            </div>
+
+            <input type="hidden" name="channel" value="{{ channel.id }}" />
+
+        {{ form_close() }}
     </div>
-
-    <div class="form-group">
-        <label for="topicContent" class="control-label">Content</label>
-        <textarea
-            id="topicContent"
-            name="content"
-            rows="8"
-            type="text"
-            class="form-control">{{ post('content') }}</textarea>
-        <span class="help-block">You can use <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a> syntax.</span>
-    </div>
-
-    <div class="form-group post-buttons">
-        <button type="submit" class="btn btn-primary btn-lg">Post this topic</button>
-        {% if returnUrl %}
-            <a class="btn btn-link btn-lg" href="{{ returnUrl }}">Cancel</a>
-        {% endif %}
-    </div>
-
-    <input type="hidden" name="channel" value="{{ channel.id }}" />
-
-{{ form_close() }}
+</div>
