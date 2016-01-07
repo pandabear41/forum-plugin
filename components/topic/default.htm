@@ -7,10 +7,6 @@
         </div>
     {% endflash %}
 
-    {% if returnUrl %}
-        <a href="{{ returnUrl }}" class="newdefbutton">Back to {{ channel.title }}</a>
-    {% endif %}
-
     {% if topic %}
 
         <h2><span>{{ topic.is_locked ? '<i class="fa fa-lock"></i>' }}{{ topic.subject }}</span></h2>
@@ -38,7 +34,7 @@
         <div class="forum-thread">
                 {% partial "@posts" %}
         </div>
-        <h4>Reply to this discussion</h4>
+        <h2><span>Reply to this discussion</span></h2>
         {% if not topic.canPost %}
             <p>
                 You cannot edit posts or make replies:

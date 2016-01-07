@@ -1,7 +1,7 @@
 {% if member.is_moderator %}
-    <div>
-
-    </div>
+    {% if returnUrl %}
+        <a href="{{ returnUrl }}" class="newdefbutton">Back to {{ channel.title }}</a>
+    {% endif %}
 
     <a href="javascript:;"
         class="newdefbutton margin-right admin-color"
