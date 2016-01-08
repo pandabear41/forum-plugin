@@ -1,7 +1,7 @@
 <div class="forum-block">
 
     {% flash %}
-        <div class="info-message{{ type }}">
+        <div class="info-message {{ type }} alert">
             <a href="#" class="close-info" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i></a>
             <p><strong>{{ type }}:</strong>{{ message }}</p>
         </div>
