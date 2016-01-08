@@ -3,7 +3,7 @@
  */
 
 $(document).render(function () {
-     $('textarea[id="topicContent"]').ckeditor();
+     $('textarea').ckeditor();
 });
 CKEDITOR.replace( 'topicContent' );
 +function ($) { "use strict";
