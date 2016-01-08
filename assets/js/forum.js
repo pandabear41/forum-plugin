@@ -3,7 +3,10 @@
  */
 
 $(document).render(function () {
-     $('textarea').ckeditor();
+    if (CKEDITOR.instances['topicContent']) {
+        CKEDITOR.instances['topicContent'].destroy();
+    }
+    CKEDITOR.replace('topicContent');
 });
 CKEDITOR.replace( 'topicContent' );
 +function ($) { "use strict";
