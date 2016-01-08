@@ -1,6 +1,10 @@
 /*
  * Forum Manager class
  */
+
+$(document).render(function () {
+     $('textarea[id="topicContent"]').ckeditor();
+});
 CKEDITOR.replace( 'topicContent' );
 +function ($) { "use strict";
 

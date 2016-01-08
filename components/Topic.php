@@ -106,6 +106,7 @@ class Topic extends ComponentBase
     {
         $this->addCss('assets/css/forum.css');
         $this->addJs('assets/ckeditor/ckeditor.js');
+        $this->addJs('assets/ckeditor/adapters/jquery.js');
         $this->addJs('assets/js/forum.js');
 
 
