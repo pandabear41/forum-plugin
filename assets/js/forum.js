@@ -3,7 +3,7 @@
  */
 
 $(document).render(function () {
-     $('textarea').ckeditor();
+     $('#topicContent').ckeditor();
 });
 +function ($) { "use strict";
 
@@ -46,9 +46,8 @@ $(document).render(function () {
                     authorName = data.author,
                     quoteText = self.formatForumQuote(authorName, quoteBody)
 
-                $('#topicContent')
-                    .val($('#topicContent').val() + quoteText + '\n\n')
-                    .focus()
+                $('#topicContent').val($('#topicContent').val() + quoteText + '\n\n');
+                $('#topicContent').focus();
             }
         })
 
