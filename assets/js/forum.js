@@ -3,12 +3,8 @@
  */
 
 $(document).render(function () {
-    if (CKEDITOR.instances['topicContent']) {
-        CKEDITOR.instances['topicContent'].destroy();
-    }
-    CKEDITOR.replace('topicContent');
+     $('textarea').ckeditor();
 });
-CKEDITOR.replace( 'topicContent' );
 +function ($) { "use strict";
 
     var ForumManager = function () {
