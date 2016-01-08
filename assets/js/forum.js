@@ -1,7 +1,6 @@
 /*
  * Forum Manager class
  */
-CKEDITOR.replace( 'topicContent' );
 +function ($) { "use strict";
 
     var ForumManager = function () {
