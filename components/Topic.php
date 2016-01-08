@@ -106,6 +106,7 @@ class Topic extends ComponentBase
     {
         $this->addCss('assets/css/forum.css');
         $this->addJs('assets/js/forum.js');
+        $this->addJs('assets/ckeditor/ckeditor.js');
 
         $this->prepareVars();
         $this->page['channel'] = $this->getChannel();
