@@ -4,13 +4,6 @@
 
 $(document).render(function () {
     $('#topicContent').ckeditor();
-    $('#topicContent').ckeditor().editor.on( 'mode', function(ev) {
-        if ( ev.editor.mode == 'source' ) {
-            var str=ev.editor.getData();
-            str=str.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
-            ev.editor.textarea.setValue(str);
-        }
-    });
 });
 +function ($) { "use strict";
 
@@ -37,8 +30,8 @@ $(document).render(function () {
 
     ForumManager.prototype.formatForumQuote = function(author, quote) {
         quote = "**" + author + "** said:\n\n" + quote
-        quote = quote.replace(/^/g, ">")
-        quote = quote.replace(/\n/g, "\n>")
+        quote = quote.replace(/^/g, "&amp;gt;")
+        quote = quote.replace(/\n/g, "\n&amp;gt;")
 
         return quote
     }
