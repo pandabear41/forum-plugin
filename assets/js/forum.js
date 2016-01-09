@@ -46,7 +46,7 @@ $(document).render(function () {
                     authorName = data.author,
                     quoteText = self.formatForumQuote(authorName, quoteBody)
 
-                $('#topicContent.editer').val($('#topicContent.editer').val() + quoteText + '\n\n');
+                $('#topicContent.editer').ckeditor().editor.val($('#topicContent.editer').ckeditor().editor.val() + quoteText + '\n\n');
                 $('#topicContent').focus();
             }
         })
