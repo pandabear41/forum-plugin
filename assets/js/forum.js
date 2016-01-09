@@ -3,7 +3,14 @@
  */
 
 $(document).render(function () {
-     $('#topicContent').ckeditor();
+    $('#topicContent').ckeditor();
+    $('#topicContent').ckeditor().editor.on( 'mode', function(ev) {
+        if ( ev.editor.mode == 'source' ) {
+            var str=ev.editor.getData();
+            str=str.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+            ev.editor.textarea.setValue(str);
+        }
+    });
 });
 +function ($) { "use strict";
 
@@ -45,6 +52,7 @@ $(document).render(function () {
                 var quoteBody = data.content,
                     authorName = data.author,
                     quoteText = self.formatForumQuote(authorName, quoteBody)
+
 
                 $('#topicContent').ckeditor().editor.setData($('#topicContent').ckeditor().editor.getData() + quoteText + '\n\n');
                 
